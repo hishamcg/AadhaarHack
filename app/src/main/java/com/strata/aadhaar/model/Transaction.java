@@ -1,6 +1,8 @@
 package com.strata.aadhaar.model;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
 	private String name,email,phone_no,aadhaar,transanction_no,status,date;
     private float amount;
 

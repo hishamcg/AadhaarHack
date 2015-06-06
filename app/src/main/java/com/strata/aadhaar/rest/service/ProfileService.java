@@ -12,9 +12,9 @@ import retrofit.http.Query;
 
 
 public interface ProfileService {
-    @PUT("/consumers/update_info.json")
-    public void updateInfo(@Body ProfileDetail profileDetail, Callback<ProfileDetail> callback);
+    @PUT("/merchants/profile_update.json")
+    public void profileUpdate(@Body ProfileDetail profileDetail, Callback<ProfileDetail> callback);
 
-    @GET("/consumers/get_info.json")
+    @GET("/merchants/get_info.json")
     public void getInfo(Callback<ProfileDetail> callback);
 }

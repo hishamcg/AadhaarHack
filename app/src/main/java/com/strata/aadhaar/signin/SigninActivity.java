@@ -92,8 +92,10 @@ public class SigninActivity extends Activity {
         public void success(final AuthToken authToken, Response response) {
             if (authToken.getSuccess()) {
                 btnSignIn.setProgress(100);
-                SharedPref.setStringValue("AUTH_TOKEN","haha");
+                SharedPref.setStringValue("AUTH_TOKEN",authToken.getAuthToken());
                 SharedPref.setStringValue("EMAIL",enter_email.getText().toString());
+                //setting header
+                RestClient.init(authToken.getAuthToken());
                 startActivity(new Intent(SigninActivity.this,ProfileEntryPage.class));
 
             } else {

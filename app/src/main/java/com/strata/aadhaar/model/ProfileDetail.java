@@ -1,25 +1,31 @@
 package com.strata.aadhaar.model;
 
-/**
- * Created by hisham on 6/6/15.
- */
-public class ProfileDetail {
-    private String phone_no,email,biz_name,tan_no,image,merchant_id;
+public class    ProfileDetail {
+    private String phone_no,email,name,tan_no,error;
+    private Boolean success;
 
-    public String getMerchant_id() {
-        return merchant_id;
+    public String getError() {
+        return error;
     }
 
-    public void setMerchant_id(String merchant_id) {
-        this.merchant_id = merchant_id;
+    public void setError(String error) {
+        this.error = error;
     }
 
-    public String getImage() {
-        return image;
+    public Boolean getSuccess() {
+        return success;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone_no() {
@@ -36,14 +42,6 @@ public class ProfileDetail {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getBiz_name() {
-        return biz_name;
-    }
-
-    public void setBiz_name(String biz_name) {
-        this.biz_name = biz_name;
     }
 
     public String getTan_no() {

@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 public class SharedPref {
     public static SharedPreferences sharedPreferences;
 
+    public static void initialize(Context context){
+        sharedPreferences =context.getSharedPreferences("PREF", Context.MODE_PRIVATE);
+    }
+
     public static void setStringValue(String key, String value){
         sharedPreferences.edit().putString(key,value).apply();
     }
@@ -32,10 +36,6 @@ public class SharedPref {
 
     public static Boolean getBooleanValue(String key){
         return sharedPreferences.getBoolean(key,false);
-    }
-
-    public static void initialize(Context context){
-        sharedPreferences =context.getSharedPreferences("PREF", Context.MODE_PRIVATE);
     }
 
 //    public static SharedPreferences getPref(Context context){

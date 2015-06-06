@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.utils.NetworkStatus;
 import com.strata.aadhaar.utils.SharedPref;
+import com.strata.aadhaar.utils.ShowToast;
 
 
 public class AadhaarHackApp extends Application {
@@ -17,5 +18,6 @@ public class AadhaarHackApp extends Application {
         RestClient.init(pref.getString("AUTH_TOKEN", ""));
         SharedPref.initialize(this);
         NetworkStatus.initialize(this);
+        ShowToast.initialize(this);
     }
 }
