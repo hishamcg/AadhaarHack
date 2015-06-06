@@ -10,5 +10,9 @@ static final String SERVER_BASE_URL = "letzdine.com";
 
     static final String BASE_URL = "http://"+SERVER_BASE_URL+"/api/v1";
     static final String GCM_URL = "http://"+SERVER_BASE_URL+"/api/v1/gcm_register";
+
+
+    public static String[] progress_states = {"Paid","Confirmed","Initiated"};
+    public static String[] failed_states = {"Failed","Cancelled"};
 }
 

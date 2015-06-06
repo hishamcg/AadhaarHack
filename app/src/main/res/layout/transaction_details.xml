@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center"
+    >
+    <TextView
+        android:id="@+id/cust_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bob Gally"
+        android:gravity="left"
+        android:textSize="40dp"/>
+    <TextView
+        android:id="@+id/aadhar_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5555 3333 2222"
+        android:gravity="right"
+        android:textSize="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaction Number: "/>
+        <TextView
+            android:id="@+id/transaction_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TXN001"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/status_img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/icon_gray_up"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:id="@+id/status_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pending"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <Button
+        android:id="@+id/btn_trans_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Cancel"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
+

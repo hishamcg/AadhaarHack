@@ -10,18 +10,18 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.strata.aadhaar.R;
-import com.strata.aadhaar.model.Feed;
+import com.strata.aadhaar.model.Transaction;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class FeedAdapter extends ArrayAdapter<Feed> {
+public class FeedAdapter extends ArrayAdapter<Transaction> {
 	private final Activity context;
-	private final ArrayList<Feed> feed_list;
+	private final ArrayList<Transaction> feed_list;
     private Typeface font_reg;
 
-	public FeedAdapter(Activity context, ArrayList<Feed> feed_list) {
+	public FeedAdapter(Activity context, ArrayList<Transaction> feed_list) {
 		super(context, R.layout.feed_list_item, feed_list);
 		this.context = context;
 		this.feed_list = feed_list;
@@ -39,7 +39,7 @@ public class FeedAdapter extends ArrayAdapter<Feed> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
-		Feed feed = feed_list.get(position);
+		Transaction feed = feed_list.get(position);
         ViewHolder viewHolder = new ViewHolder();
         if (rowView == null) {
             LayoutInflater inflater = (LayoutInflater) context

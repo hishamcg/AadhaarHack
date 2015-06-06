@@ -2,10 +2,7 @@ package com.strata.aadhaar.rest.service;
 
 
 import com.google.gson.JsonElement;
-import com.strata.aadhaar.model.Feed;
-import com.strata.aadhaar.model.NewTrasaction;
-
-import java.util.ArrayList;
+import com.strata.aadhaar.model.Transaction;
 
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -18,5 +15,5 @@ public interface PayDetailService {
     public void getBill(@Query("amount") String amount, Callback<JsonElement> callback);
 
     @PUT("/payments/bill_generator.json")
-    public void getTransactions(@Body NewTrasaction newTrasaction, Callback<NewTrasaction> callback);
+    public void getTransactions(@Body Transaction transaction, Callback<Transaction> callback);
 }

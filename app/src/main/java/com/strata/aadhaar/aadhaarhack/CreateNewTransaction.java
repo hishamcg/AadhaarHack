@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.andreabaccega.widget.FormEditText;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.strata.aadhaar.R;
-import com.strata.aadhaar.model.NewTrasaction;
+import com.strata.aadhaar.model.Transaction;
 import com.strata.aadhaar.rest.RestClient;
 
 import retrofit.Callback;
@@ -32,18 +32,18 @@ public class CreateNewTransaction extends Activity{
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewTrasaction newTrac = new NewTrasaction();
+                Transaction newTrac = new Transaction();
 
                 if (user_name.testValidity() && user_phone.testValidity() && user_aadhaar.testValidity() && user_email.testValidity()) {
                     newTrac.setPhone_no(user_phone.getText().toString());
                     newTrac.setEmail(user_email.getText().toString());
                     newTrac.setName(user_name.getText().toString());
-                    newTrac.setAadaar(user_aadhaar.getText().toString());
+                    newTrac.setAadhaar(user_aadhaar.getText().toString());
 
                     update_button.setProgress(1);
-                    RestClient.getPayDetailService().getTransactions(newTrac, new Callback<NewTrasaction>() {
+                    RestClient.getPayDetailService().getTransactions(newTrac, new Callback<Transaction>() {
                         @Override
-                        public void success(NewTrasaction result, Response response) {
+                        public void success(Transaction result, Response response) {
                             update_button.setProgress(100);
 
                         }
