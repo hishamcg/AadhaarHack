@@ -13,5 +13,5 @@ import retrofit.http.Query;
 
 public interface FeedService {
     @GET("/feed/transaction.json")
-    public void getTransactions(@Query("merchant_id") String merchant_id, Callback<ArrayList<Feed>> callback);
+    public void getTransactions(Callback<ArrayList<Feed>> callback);
 }

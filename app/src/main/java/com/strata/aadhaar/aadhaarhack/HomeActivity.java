@@ -15,7 +15,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.melnykov.fab.FloatingActionButton;
 import com.strata.aadhaar.R;
 import com.strata.aadhaar.adapters.FeedAdapter;
@@ -24,11 +23,7 @@ import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.utils.FontsOverride;
 import com.strata.aadhaar.utils.NetworkStatus;
 import com.strata.aadhaar.utils.SharedPref;
-
-import org.json.JSONArray;
-
 import java.util.ArrayList;
-
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -61,7 +56,7 @@ public class HomeActivity extends Activity  {
 		buttonFloat.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if (NetworkStatus.isNetworkAvailable() && NetworkStatus.isGpsAvailable()) {
+                if (NetworkStatus.isNetworkAvailable()) {
                     Bundle bund = new Bundle();
                     bund.putString("isFromChatPage", "NewDineRun");
                     Intent in = new Intent(getApplicationContext(), CreateNewTransaction.class);
@@ -73,7 +68,7 @@ public class HomeActivity extends Activity  {
             }
         });
 
-        RestClient.getFeedService().getTransactions(SharedPref.getStringValue("MERCHANT_ID"),callback);
+        RestClient.getFeedService().getTransactions(callback);
 	}
 
     private Callback<ArrayList<Feed>> callback = new Callback<ArrayList<Feed>>() {
@@ -100,7 +95,7 @@ public class HomeActivity extends Activity  {
         Log.d("OnResume","HomeActiciyty");
 		super.onResume();
 		this.registerReceiver(mMessageReceiver, new IntentFilter("com.strata.team_lunch.chat"));
-
+        RestClient.getFeedService().getTransactions(callback);
 	}
 
 
