@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:gravity="center"
-    >
+    android:weightSum="1">
     <TextView
         android:id="@+id/cust_name"
         android:layout_width="wrap_content"
@@ -20,40 +20,55 @@
         android:layout_height="wrap_content"
         android:text="5555 3333 2222"
         android:gravity="right"
-        android:textSize="30dp"/>
-
+        android:textSize="20dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ui_light_gray"
+        android:layout_margin="10dip"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="40dp">
-
+        android:layout_height="wrap_content">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Transaction Number: "/>
+            android:gravity="center"
+            android:textColor="@color/ui_dark_blue"
+            android:text="Rs. 1000"
+            android:textSize="25dp"/>
         <TextView
-            android:id="@+id/transaction_num"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="TXN001"/>
+            android:gravity="center"
+            android:textColor="@color/ui_dark_blue"
+            android:text="10/06/2015"
+            android:textSize="25dp"/>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ui_light_gray"
+        android:layout_margin="10dip"/>
+    <TextView
+        android:id="@+id/transaction_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TXN001"/>
     <ImageView
         android:id="@+id/status_img"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/icon_gray_up"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal" />
     <TextView
         android:id="@+id/status_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="pending"
-        android:layout_gravity="center_horizontal"
-        />
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/btn_trans_cancel"

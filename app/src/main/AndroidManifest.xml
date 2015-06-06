@@ -48,6 +48,16 @@
             android:label="Create"
             android:screenOrientation="portrait"  >
         </activity>
+        <activity
+            android:name=".aadhaarhack.TransactionDetails"
+            android:label="Create"
+            android:screenOrientation="portrait"  >
+        </activity>
+        <activity
+            android:name=".aadhaarhack.ManualTransaction"
+            android:label="Create"
+            android:screenOrientation="portrait"  >
+        </activity>
 
     </application>
 
