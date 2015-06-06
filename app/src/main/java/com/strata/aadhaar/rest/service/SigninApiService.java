@@ -8,6 +8,10 @@ import retrofit.http.Query;
 
 
 public interface SigninApiService {
-    @GET("/login_create")
-    public void userAuthenticate(@Query("name") String name,@Query("password") String password, Callback<AuthToken> callback);
+    @GET("/signups/new")
+    public void userAuthenticate(@Query("email") String email,@Query("password") String password, Callback<AuthToken> callback);
+
+    @GET("/signups/reset_password")
+    public void resetPassword(@Query("email") String email,Callback<Boolean> callback);
+
 }

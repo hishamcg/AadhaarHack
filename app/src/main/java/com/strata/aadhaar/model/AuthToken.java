@@ -4,8 +4,7 @@ package com.strata.aadhaar.model;
  * Created by hisham on 25/2/15.
  */
 public class AuthToken {
-    String auth_token;
-    String pass_key;
+    String authToken,errors;
     Boolean success;
 
     public Boolean getSuccess() {
@@ -16,19 +15,19 @@ public class AuthToken {
         this.success = success;
     }
 
-    public String getPass_key() {
-        return pass_key;
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public void setPass_key(String pass_key) {
-        this.pass_key = pass_key;
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
-    public String getAuth_token() {
-        return auth_token;
+    public String getErrors() {
+        return errors;
     }
 
-    public void setAuth_token(String auth_token) {
-        this.auth_token = auth_token;
+    public void setErrors(String errors) {
+        this.errors = errors;
     }
 }

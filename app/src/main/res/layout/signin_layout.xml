@@ -54,7 +54,7 @@
         android:layout_below="@+id/enter_email"
         android:gravity="center"
         android:textSize="18sp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_centerInParent="true"
         android:inputType="textPassword"
         android:hint="Password"
@@ -62,14 +62,23 @@
         android:singleLine="true">
     </com.andreabaccega.widget.FormEditText>
     <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ui_light_blue"
+        android:layout_below="@+id/enter_password"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="Forgot Password"/>
+    <TextView
         android:id="@+id/no_connection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#EB4C4C"
         android:visibility="gone"
         android:textStyle="italic"
-        android:layout_below="@+id/enter_password"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/forgot_password"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
         android:text="No Internet Connection"
         android:textAppearance="?android:attr/textAppearanceMedium" />

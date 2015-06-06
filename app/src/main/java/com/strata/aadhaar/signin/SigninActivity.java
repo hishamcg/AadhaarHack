@@ -5,11 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +29,37 @@ public class SigninActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lib_signin_layout);
+        setContentView(R.layout.signin_layout);
 
         btnSignIn = (ActionProcessButton) findViewById(R.id.button1);
         btnSignIn.setMode(ActionProcessButton.Mode.ENDLESS);
         final TextView no_connection = (TextView) findViewById(R.id.no_connection);
+        final TextView forgot_password = (TextView) findViewById(R.id.forgot_password);
         enter_email = (FormEditText) findViewById(R.id.enter_email);
         final FormEditText enter_password = (FormEditText) findViewById(R.id.enter_password);
+
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (enter_email.testValidity()){
+                    RestClient.getSigninApiService().resetPassword(enter_email.getText().toString(), new Callback<Boolean>() {
+                        @Override
+                        public void success(Boolean success, Response response) {
+                            if(success){
+                                toast("Reset password link has been send to your mail");
+                            }else{
+                                toast("Failed");
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            toast("Failed");
+                        }
+                    });
+                }
+            }
+        });
         btnSignIn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 if (NetworkStatus.isNetworkAvailable()) {
@@ -69,7 +90,7 @@ public class SigninActivity extends Activity {
 
         @Override
         public void success(final AuthToken authToken, Response response) {
-            if (authToken.getAuth_token()==null) {
+            if (authToken.getSuccess()) {
                 btnSignIn.setProgress(100);
                 SharedPref.setStringValue("AUTH_TOKEN","haha");
                 SharedPref.setStringValue("EMAIL",enter_email.getText().toString());
@@ -77,7 +98,7 @@ public class SigninActivity extends Activity {
 
             } else {
                 btnSignIn.setProgress(-1);
-                toast("Login Failed. Please try after some time");
+                toast(authToken.getErrors());
             }
         }
     };
