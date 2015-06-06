@@ -1,6 +1,7 @@
 package com.strata.aadhaar.aadhaarhack;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -36,7 +37,9 @@ public class CreateNewTransaction extends Activity{
             public void onClick(View v) {
                 Transaction newTrac = new Transaction();
                 if (user_aadhaar.testValidity()) {
-                    if(!checkBox.isChecked()){
+                    if(checkBox.isChecked()){
+                        Intent in = new Intent(getApplicationContext(), ManualTransaction.class);
+                        startActivity(in);
 
                     }else if(user_phone.testValidity()) {
                         newTrac.setPhone_no(user_phone.getText().toString());

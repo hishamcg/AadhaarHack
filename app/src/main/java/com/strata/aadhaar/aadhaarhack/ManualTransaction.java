@@ -73,8 +73,7 @@ public class ManualTransaction extends Activity {
                 RestClient.getPayDetailService().postManualTransaction(ifscCode.getText().toString(), accNum.getText().toString(), callback);
             }
         });
-
-    }
+        }
 
     private Callback<String> callback = new Callback<String>() {
         @Override

@@ -29,10 +29,10 @@ public class TransactionDetails extends Activity {
     private TextView custName;
     private TextView aadhaarNum;
     private TextView Status;
-    private TextView transactionNum;
+    private TextView txtTransactionNum;
     private ImageView statusImg;
     private Transaction feed = new Transaction();
-    private String transaaction_id;
+    private String transaaction_no;
     private Button btnCancel;
 
     @SuppressLint("NewApi")
@@ -44,16 +44,17 @@ public class TransactionDetails extends Activity {
         custName = (TextView) findViewById(R.id.cust_name);
         aadhaarNum = (TextView) findViewById(R.id.aadhar_no);
         Status = (TextView) findViewById(R.id.status_txt);
-        transactionNum = (TextView) findViewById(R.id.transaction_num);
+        txtTransactionNum = (TextView) findViewById(R.id.transaction_num);
         btnCancel = (Button) findViewById(R.id.btn_trans_cancel);
         statusImg = (ImageView) findViewById(R.id.status_img);
-        transaaction_id = ""; //getIntent
-        RestClient.getFeedService().getTransactionDetail(transaaction_id,callback);
+        Bundle bund = getIntent().getExtras();
+        transaaction_no = bund.getString("transactionNum");
+        RestClient.getFeedService().getTransactionDetail(transaaction_no,callback);
 
 
         custName.setText(feed.getName());
         aadhaarNum.setText(feed.getAadhaar());
-        transactionNum.setText(feed.getTransanction_no());
+        txtTransactionNum.setText(feed.getTransanction_no());
         Status.setText(feed.getStatus());
 
         if(feed.getStatus().equals("Completed"))
@@ -68,7 +69,7 @@ public class TransactionDetails extends Activity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RestClient.getFeedService().cancelTransaction(transaaction_id, callbackCancleTransaction);
+                RestClient.getFeedService().cancelTransaction(transaaction_no, callbackCancleTransaction);
             }
         });
 
