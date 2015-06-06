@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ripple"
+    android:background="#fff"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/LL_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/id_amount"
+        android:layout_marginTop="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginEnd="10dip"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/id_aadhaar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123412341234"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:textColor="@color/ui_light_blue"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/id_txn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="txn_no: 0000001"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:textColor="@color/ui_text_gray"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/id_txn_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="2:00 PM  |  24/10/15"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:textColor="@color/ui_text_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/id_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:text="Rs 5000"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:textColor="@color/ui_text_gray"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+</RelativeLayout>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:background="#fff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/id1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="160dip"
+                    android:layout_height="160dip"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/dark_grey_container"
+                    android:src="@drawable/generic_user" />
+
+                <IconTextView
+                    android:id="@+id/cameras"
+                    android:text="{fa-camera}"
+                    android:textColor="@color/ui_text_gray"
+                    android:textSize="25sp"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip"
+                    android:padding="5dip"
+                    android:gravity="center"
+                    android:layout_alignEnd="@+id/user_image"
+                    android:layout_alignRight="@+id/user_image"
+                    android:background="@drawable/light_grey_container"
+                    android:layout_centerHorizontal="true" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/edittext_top_padding"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:orientation="horizontal">
+                    <IconTextView
+                        android:id="@+id/icon_user_name"
+                        android:textColor="@color/ui_light_blue"
+                        android:text="{fa-user}"
+                        android:textSize="25sp"
+                        android:gravity="center"
+                        android:background="#ccc"
+                        android:layout_width="45dip"
+                        android:layout_height="match_parent"/>
+                    <com.andreabaccega.widget.FormEditText
+                        custom:emptyErrorString="Name cannot be blank"
+                        android:id="@+id/biz_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:textSize="15sp"
+                        android:paddingLeft="5dip"
+                        android:layout_marginLeft="5dip"
+                        android:background="#eee"
+                        android:hint="Biz Name" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/edittext_top_padding"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:orientation="horizontal">
+                    <IconTextView
+                        android:id="@+id/icon_user_email"
+                        android:textColor="@color/ui_light_blue"
+                        android:text="{fa-mobile}"
+                        android:textSize="25sp"
+                        android:gravity="center"
+                        android:background="#ccc"
+                        android:layout_width="45dip"
+                        android:layout_height="match_parent"/>
+                    <com.andreabaccega.widget.FormEditText
+                        custom:emptyErrorString="Email cannot be blank"
+                        android:id="@+id/user_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:paddingLeft="5dip"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dip"
+                        android:background="#eee"
+                        android:hint="Phone" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/edittext_top_padding"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:orientation="horizontal">
+                    <IconTextView
+                        android:id="@+id/icon_user_tan"
+                        android:textColor="@color/ui_light_blue"
+                        android:text="{fa-tag}"
+                        android:textSize="25sp"
+                        android:gravity="center"
+                        android:background="#ccc"
+                        android:layout_width="45dip"
+                        android:layout_height="match_parent"/>
+                    <com.andreabaccega.widget.FormEditText
+                        custom:emptyErrorString="Email cannot be blank"
+                        android:id="@+id/user_tan"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:paddingLeft="5dip"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dip"
+                        android:background="#eee"
+                        android:hint="Tan Number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_marginTop="@dimen/edittext_top_padding"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <IconTextView
+                        android:id="@+id/icon_user_phone"
+                        android:textColor="@color/ui_text_gray"
+                        android:text="{fa-envelope-o}"
+                        android:textSize="25sp"
+                        android:gravity="center"
+                        android:background="#ccc"
+                        android:layout_width="45dip"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dip"
+                        android:paddingLeft="5dip"
+                        android:paddingTop="12dip"
+                        android:textSize="15sp"
+                        android:background="#eee"
+                        android:layout_marginLeft="5dip"/>
+                </LinearLayout>
+                <com.dd.processbutton.iml.ActionProcessButton
+                    android:id="@+id/profile_update_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:layout_marginTop="25dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:text="Update"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    custom:pb_colorComplete="@color/green_complete"
+                    custom:pb_colorNormal="@android:color/holo_blue_dark"
+                    custom:pb_colorPressed="#ff005982"
+                    custom:pb_colorProgress="@color/purple_progress"
+                    custom:pb_textComplete="Success"
+                    custom:pb_textProgress="Loading"
+                    custom:pb_textError="Retry"
+                    custom:pb_colorError="@color/red_error" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

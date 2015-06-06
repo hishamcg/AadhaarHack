@@ -1,0 +1,94 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/common_signin_btn_dark_text_default"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    tools:context=".SearchActivity" >
+<!--<ScrollView-->
+    <!--android:id="@+id/scrollView"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent">-->
+<!--<LinearLayout-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="20dip"-->
+    <!--tools:context=".SearchActivity" >-->
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ld"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/enter_email"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <com.andreabaccega.widget.FormEditText
+        android:id="@+id/enter_email"
+        android:background="#ffd3d3d3"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:textColor="#444444"
+        android:singleLine="true">
+    </com.andreabaccega.widget.FormEditText>
+    <com.andreabaccega.widget.FormEditText
+        android:id="@+id/enter_password"
+        android:background="#ffd3d3d3"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_below="@+id/enter_email"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textColor="#444444"
+        android:singleLine="true">
+    </com.andreabaccega.widget.FormEditText>
+    <TextView
+        android:id="@+id/no_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#EB4C4C"
+        android:visibility="gone"
+        android:textStyle="italic"
+        android:layout_below="@+id/enter_password"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="No Internet Connection"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/button1"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:text="Register"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        custom:pb_colorComplete="@color/green_complete"
+        custom:pb_colorNormal="@android:color/holo_blue_dark"
+        custom:pb_colorPressed="#ff005982"
+        custom:pb_colorProgress="@color/purple_progress"
+        custom:pb_textComplete="Success"
+        custom:pb_textProgress="Loading"
+        custom:pb_textError="Retry"
+        custom:pb_colorError="@color/red_error" />
+</RelativeLayout>
+<!--</ScrollView>-->
+<!--</LinearLayout>-->

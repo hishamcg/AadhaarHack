@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AadhaarHack</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="otp_hint"><font size="16">Enter the Verification Code</font></string>
+</resources>

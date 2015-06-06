@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="dark_gray">#ccc</color>
+    <color name="white">#fff</color>
+    <color name="light_white">#5fff</color>
+    <!-- new ui -->
+    <color name="ui_text_gray">#808285</color>
+    <color name="ui_medium_gray">#d1d3d4</color>
+    <color name="ui_light_gray">#e6e7e8</color>
+    <color name="ui_light_blue">#5ab3e5</color>
+    <color name="ui_dark_blue">#257eb2</color>
+    <color name="ui_super_light_gray">#f4f5f5</color>
+    <color name="ui_curved_gray">#E6E7E8</color>
+    <color name="ui_cont_dark_gray">#BCBEC0</color>
+    <color name="ui_background_alpha">#9000</color>
+    <!-- theme blue-->
+    <color name="theme_blue">#114a62</color>
+    <color name="theme_blue_1">#32C7E2</color>
+    <color name="theme_blue_light">#ff156683</color>
+</resources>
