@@ -18,11 +18,10 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 import com.strata.aadhaar.R;
 import com.strata.aadhaar.adapters.FeedAdapter;
-import com.strata.aadhaar.model.Feed;
+import com.strata.aadhaar.model.Transaction;
 import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.utils.FontsOverride;
 import com.strata.aadhaar.utils.NetworkStatus;
-import com.strata.aadhaar.utils.SharedPref;
 import java.util.ArrayList;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -30,7 +29,7 @@ import retrofit.client.Response;
 
 public class HomeActivity extends Activity  {
     private TextView no_feeds;
-	private ArrayList<Feed> feedList = new ArrayList<>();
+	private ArrayList<Transaction> feedList = new ArrayList<>();
     private FeedAdapter adapter;
 
 	
@@ -71,9 +70,9 @@ public class HomeActivity extends Activity  {
         RestClient.getFeedService().getTransactions(callback);
 	}
 
-    private Callback<ArrayList<Feed>> callback = new Callback<ArrayList<Feed>>() {
+    private Callback<ArrayList<Transaction>> callback = new Callback<ArrayList<Transaction>>() {
         @Override
-        public void success(ArrayList<Feed> feeds, Response response) {
+        public void success(ArrayList<Transaction> feeds, Response response) {
             if(feeds.isEmpty()){
                 no_feeds.setVisibility(View.VISIBLE);
             }else {
