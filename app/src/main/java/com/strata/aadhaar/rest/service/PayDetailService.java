@@ -16,4 +16,11 @@ public interface PayDetailService {
 
     @PUT("/payments/bill_generator.json")
     public void getTransactions(@Body Transaction transaction, Callback<Transaction> callback);
+
+    @GET("/payments/post_manual_transaction.json")
+    public void postManualTransaction(@Query("ifsc") String ifsc, @Query("acc_no") String acc_no, Callback<String> callback);
+
+
+
+
 }
