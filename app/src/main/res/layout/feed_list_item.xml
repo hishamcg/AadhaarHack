@@ -10,10 +10,7 @@
         android:id="@+id/LL_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/id_amount"
-        android:layout_marginTop="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginEnd="10dip"
+        android:layout_toLeftOf="@+id/LL_amount"
         android:orientation="vertical">
         <TextView
             android:id="@+id/id_aadhaar"
@@ -34,29 +31,44 @@
             android:ellipsize="end"
             android:gravity="start"
             android:textColor="@color/ui_text_gray"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/id_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="In Progress"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:textColor="@color/ui_text_gray"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/LL_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/id_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Rs 5000"
+            android:ellipsize="end"
+            android:textColor="@color/ui_text_gray"
+            android:textStyle="bold"
+            android:textSize="20sp" />
         <TextView
             android:id="@+id/id_txn_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="2:00 PM  |  24/10/15"
+            android:text="24/10/15"
             android:ellipsize="end"
             android:gravity="start"
             android:textColor="@color/ui_text_gray"
             android:textSize="14sp" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/id_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:singleLine="true"
-        android:text="Rs 5000"
-        android:ellipsize="end"
-        android:gravity="start"
-        android:textColor="@color/ui_text_gray"
-        android:textStyle="bold"
-        android:textSize="20sp" />
 </RelativeLayout>

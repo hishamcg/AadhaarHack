@@ -49,14 +49,13 @@ public class ProfileEntryPage extends Activity {
     private ImageView user_image;
     private ProgressBar progress_bar;
     private Uri fileUri;
-    private String imgPath,email;
+    private String imgPath;
     //private int stay_nb_id = 0,work_nb_id = 0,private int other_nb_id = 0,private int dine_nb_id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_entry_layout);
-        email = getIntent().getStringExtra("email");
         progress_bar = (ProgressBar) findViewById(R.id.progressBar1);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IconTextView btnCamera = (IconTextView) findViewById(R.id.cameras);
@@ -65,7 +64,7 @@ public class ProfileEntryPage extends Activity {
         user_phone = (FormEditText) findViewById(R.id.user_phone);
         user_tan = (FormEditText) findViewById(R.id.user_tan);
         user_email = (TextView) findViewById(R.id.user_email);
-        user_email.setText(email);
+        user_email.setText(SharedPref.getStringValue("EMAIL"));
         update_button = (ActionProcessButton) findViewById(R.id.profile_update_button);
         update_button.setMode(ActionProcessButton.Mode.ENDLESS);
         update_button.setOnClickListener(new OnClickListener() {
@@ -83,25 +82,24 @@ public class ProfileEntryPage extends Activity {
                         profile_detail.setImage(encodeImagetoString());
                     }
                     update_button.setProgress(1);
-                    RestClient.getProfileService().updateInfo(profile_detail, new Callback<ProfileDetail>() {
-                        @Override
-                        public void success(ProfileDetail detail, Response response) {
-                            update_button.setProgress(100);
-                            updateConsumerInfo(detail);
-                        }
-
-                        @Override
-                        public void failure(RetrofitError retrofitError) {
-                            update_button.setProgress(-1);
-                            Toast toast = Toast.makeText(getApplicationContext(),
-                                    "Failed to update information",
-                                    Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 170);
-                            toast.show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(getApplicationContext(), "Name and Location can't be blank", Toast.LENGTH_LONG).show();
+                    updateConsumerInfo(profile_detail);
+//                    RestClient.getProfileService().updateInfo(profile_detail, new Callback<ProfileDetail>() {
+//                        @Override
+//                        public void success(ProfileDetail detail, Response response) {
+//                            update_button.setProgress(100);
+//                            updateConsumerInfo(detail);
+//                        }
+//
+//                        @Override
+//                        public void failure(RetrofitError retrofitError) {
+//                            update_button.setProgress(-1);
+//                            Toast toast = Toast.makeText(getApplicationContext(),
+//                                    "Failed to update information",
+//                                    Toast.LENGTH_SHORT);
+//                            toast.setGravity(Gravity.TOP, 0, 170);
+//                            toast.show();
+//                        }
+//                    });
                 }
             }
         });
@@ -133,15 +131,13 @@ public class ProfileEntryPage extends Activity {
         RestClient.getProfileService().getInfo(new Callback<ProfileDetail>() {
             @Override
             public void success(ProfileDetail detail, Response response) {
-                update_button.setProgress(100);
                 setNBDetails(detail);
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
-                update_button.setProgress(-1);
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "Failed to update information",
+                        "Failed to fetch data",
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 170);
                 toast.show();

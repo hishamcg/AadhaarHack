@@ -84,6 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dip"
                         android:textSize="15sp"
+                        android:inputType="text"
                         android:paddingLeft="5dip"
                         android:layout_marginLeft="5dip"
                         android:background="#eee"
@@ -111,6 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dip"
                         android:paddingLeft="5dip"
+                        android:inputType="phone"
                         android:textSize="15sp"
                         android:layout_marginLeft="5dip"
                         android:background="#eee"
@@ -139,6 +141,7 @@
                         android:layout_height="45dip"
                         android:paddingLeft="5dip"
                         android:textSize="15sp"
+                        android:inputType="text"
                         android:layout_marginLeft="5dip"
                         android:background="#eee"
                         android:hint="Tan Number" />

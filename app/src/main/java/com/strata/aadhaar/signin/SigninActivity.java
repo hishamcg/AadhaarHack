@@ -69,12 +69,11 @@ public class SigninActivity extends Activity {
 
         @Override
         public void success(final AuthToken authToken, Response response) {
-            if (authToken != null) {
+            if (authToken.getAuth_token()==null) {
                 btnSignIn.setProgress(100);
-                SharedPref.setStringValue("AUTH_TOKEN",authToken.getAuth_token());
-                Intent n = new Intent(SigninActivity.this,ProfileEntryPage.class);
-                n.putExtra("email",enter_email.getText().toString());
-                startActivity(n);
+                SharedPref.setStringValue("AUTH_TOKEN","haha");
+                SharedPref.setStringValue("EMAIL",enter_email.getText().toString());
+                startActivity(new Intent(SigninActivity.this,ProfileEntryPage.class));
 
             } else {
                 btnSignIn.setProgress(-1);

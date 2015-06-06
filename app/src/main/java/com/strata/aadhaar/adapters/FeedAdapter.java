@@ -34,6 +34,7 @@ public class FeedAdapter extends ArrayAdapter<Transaction> {
         public TextView id_txn;
         public TextView id_txn_date;
         public TextView id_amount;
+        public TextView id_status;
     }
 
 	@Override
@@ -51,6 +52,8 @@ public class FeedAdapter extends ArrayAdapter<Transaction> {
             viewHolder.id_txn = (TextView) rowView.findViewById(R.id.id_txn);
             viewHolder.id_txn_date = (TextView) rowView.findViewById(R.id.id_txn_date);
             viewHolder.id_amount = (TextView) rowView.findViewById(R.id.id_amount);
+            viewHolder.id_status = (TextView) rowView.findViewById(R.id.id_status);
+            viewHolder.id_status.setTypeface(font_reg);
             viewHolder.id_aadhaar.setTypeface(font_reg);
             viewHolder.id_txn.setTypeface(font_reg);
             viewHolder.id_txn_date.setTypeface(font_reg);
