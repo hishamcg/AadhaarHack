@@ -15,8 +15,10 @@ package com.citrus.payment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 
-public class Bill {
+
+public class Bill{
     private String txnId, signature, access_key, returnurl, notifyurl=null;
     private JSONObject amount;
 

@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.strata.aadhaar.Config;
 import com.strata.aadhaar.R;
 import com.strata.aadhaar.model.Transaction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -67,6 +69,15 @@ public class FeedAdapter extends ArrayAdapter<Transaction> {
         viewHolder.id_txn.setText("Txn : "+feed.getId());
         viewHolder.id_txn_date.setText(feed.getDate());
         viewHolder.id_amount.setText("Rs "+String.valueOf(feed.getAmount()));
+        viewHolder.id_status.setText("Status : "+feed.getStatus());
+
+        if("Completed".equals(feed.getStatus())) {
+            viewHolder.id_status.setTextColor(0xff2b9633);
+        }else if(Arrays.asList(Config.failed_states).contains(feed.getStatus()))
+            viewHolder.id_status.setTextColor(0xff992416);
+        else
+            viewHolder.id_status.setTextColor(0xff808285);
+
 
 		return rowView;
 	}

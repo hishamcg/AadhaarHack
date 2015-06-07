@@ -15,6 +15,36 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="* fields are mandatory"
+                android:textColor="@color/ui_text_gray"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_marginTop="@dimen/edittext_top_padding"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <IconTextView
+                    android:textColor="@color/ui_light_blue"
+                    android:text="{fa-rupee}"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:background="#ccc"
+                    android:layout_width="45dip"
+                    android:layout_height="match_parent"/>
+                <com.andreabaccega.widget.FormEditText
+                    custom:emptyErrorString="Amount cannot be blank"
+                    android:id="@+id/user_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:paddingLeft="5dip"
+                    android:inputType="number"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dip"
+                    android:background="#eee"
+                    android:hint="Amount *" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -68,38 +98,13 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_marginTop="@dimen/edittext_top_padding"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <IconTextView
-                    android:textColor="@color/ui_light_blue"
-                    android:text="{fa-rupee}"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:background="#ccc"
-                    android:layout_width="45dip"
-                    android:layout_height="match_parent"/>
-                <com.andreabaccega.widget.FormEditText
-                    custom:emptyErrorString="Email cannot be blank"
-                    android:id="@+id/user_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dip"
-                    android:paddingLeft="5dip"
-                    android:inputType="number"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="5dip"
-                    android:background="#eee"
-                    android:hint="Amount" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/edittext_top_padding"
                 android:orientation="horizontal">
                 <IconTextView
                     android:id="@+id/icon_user_name"
                     android:textColor="@color/ui_light_blue"
-                    android:text="{fa-user}"
+                    android:text="{fa-envelope}"
                     android:textSize="25sp"
                     android:gravity="center"
                     android:background="#ccc"
@@ -107,7 +112,7 @@
                     android:layout_height="match_parent"/>
                 <com.andreabaccega.widget.FormEditText
                     custom:emptyErrorString="Name cannot be blank"
-                    android:id="@+id/user_name"
+                    android:id="@+id/user_email"
                     android:layout_width="match_parent"
                     android:layout_height="45dip"
                     android:textSize="15sp"
@@ -115,7 +120,7 @@
                     android:paddingLeft="5dip"
                     android:layout_marginLeft="5dip"
                     android:background="#eee"
-                    android:hint="Name" />
+                    android:hint="Email" />
             </LinearLayout>
 
             <CheckBox
@@ -132,7 +137,7 @@
                 android:layout_marginTop="25dip"
                 android:layout_marginLeft="20dip"
                 android:layout_marginRight="20dip"
-                android:text="Transfer"
+                android:text="Create"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 custom:pb_colorComplete="@color/green_complete"

@@ -8,12 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -59,7 +59,7 @@ import java.util.Calendar;
 public class PaymentActivity extends Activity {
 
     private ArrayList<NetBanking> netBankList = new ArrayList<>();
-    private String bankcode,feed_id;
+    private String bankcode;
     private ArrayAdapter<NetBanking> modeAdapter;
     private ListView banks_list;
     ActionProcessButton credit_pay,bank_pay;
@@ -79,7 +79,6 @@ public class PaymentActivity extends Activity {
         setContentView(R.layout.payment_select_layout);
         activity = this;
         bill = new Bill(getIntent().getStringExtra("billString"));
-        feed_id = getIntent().getStringExtra("feed_id");
         paymentOptions();
         scrollView = (ScrollView)findViewById(R.id.scroll_view);
         paymentLayout = (RelativeLayout)findViewById(R.id.payment_layout);
@@ -395,7 +394,6 @@ public class PaymentActivity extends Activity {
                 if (!TextUtils.isEmpty(redirect.getString("redirectUrl"))) {
                     //Toast.makeText(getApplicationContext(), "Redirecting to Payment Gateway. Please wait ... ", Toast.LENGTH_LONG).show();
                     i.putExtra("url", redirect.getString("redirectUrl"));
-                    i.putExtra("feed_id",feed_id);
                     startActivity(i);
                     finish();
                 }
@@ -429,6 +427,9 @@ public class PaymentActivity extends Activity {
                         mCard.setType("unknown");
 
                     TextView t = new TextView(activity);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    params.setMargins(0,0,10,0);
+                    t.setLayoutParams(params);
                     t.setText(mCard.getBank().toUpperCase() + " : " + mCard.getType().toUpperCase() + " : " + mCard.getNumber());
                     t.setPadding(20, 20, 20, 20);
                     t.setGravity(Gravity.CENTER);

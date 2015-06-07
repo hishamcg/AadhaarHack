@@ -6,8 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -15,6 +18,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
 import com.melnykov.fab.FloatingActionButton;
 import com.strata.aadhaar.R;
 import com.strata.aadhaar.adapters.FeedAdapter;
@@ -22,6 +28,8 @@ import com.strata.aadhaar.model.Transaction;
 import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.utils.FontsOverride;
 import com.strata.aadhaar.utils.NetworkStatus;
+import com.strata.aadhaar.utils.ShowToast;
+
 import java.util.ArrayList;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -32,7 +40,24 @@ public class HomeActivity extends Activity  {
 	private ArrayList<Transaction> feedList = new ArrayList<>();
     private FeedAdapter adapter;
 
-	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -48,10 +73,8 @@ public class HomeActivity extends Activity  {
 		feed_listview.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bundle bund = new Bundle();
-                bund.putSerializable("txn_id", feedList.get(position).getId());
                 Intent in = new Intent(getApplicationContext(), TransactionDetails.class);
-                in.putExtras(bund);
+                in.putExtra("txn_id",feedList.get(position).getId());
                 startActivity(in);
             }
         });
@@ -86,22 +109,17 @@ public class HomeActivity extends Activity  {
         public void failure(RetrofitError error) {
             if(feedList.isEmpty())
                 no_feeds.setVisibility(View.VISIBLE);
-            Toast.makeText(HomeActivity.this,"Failed to fetch data",Toast.LENGTH_SHORT).show();
+            else
+                no_feeds.setVisibility(View.GONE);
+            ShowToast.setText(error.toString());
         }
     };
 
 	@Override
 	public void onResume() {
-        Log.d("OnResume","HomeActiciyty");
 		super.onResume();
         RestClient.getFeedService().getTransactions(callback);
 	}
-
-	private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-	    @Override
-	    public void onReceive(Context context, Intent intent) {
-	    }
-	};
 }
 
 

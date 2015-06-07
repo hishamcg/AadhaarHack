@@ -13,13 +13,17 @@ import android.widget.Toast;
 
 import com.andreabaccega.widget.FormEditText;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.strata.aadhaar.Config;
 import com.strata.aadhaar.R;
+import com.strata.aadhaar.model.CreatedBill;
 import com.strata.aadhaar.model.Transaction;
 import com.strata.aadhaar.payment_gateway.PaymentActivity;
 import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.utils.FontsOverride;
+import com.strata.aadhaar.utils.ShowToast;
 
 import java.util.Arrays;
 
@@ -33,7 +37,10 @@ public class TransactionDetails extends Activity {
     private ImageView statusImg;
     private String txn_id;
     private ActionProcessButton btnPay;
-    private  TextView custName,aadhaarNum,status,date,transactionId,amount;
+    private FormEditText ifscCode,accNum;
+    private TextView custName,aadhaarNum,status,date,transactionId,amount;
+    private LinearLayout accLayout;
+    private Button btnCancel;
 
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,39 +55,71 @@ public class TransactionDetails extends Activity {
         amount = (TextView) findViewById(R.id.amount);
         date = (TextView) findViewById(R.id.date);
         transactionId = (TextView) findViewById(R.id.transaction_num);
-        Button btnCancel = (Button) findViewById(R.id.btn_trans_cancel);
+        btnCancel = (Button) findViewById(R.id.btn_trans_cancel);
         statusImg = (ImageView) findViewById(R.id.status_img);
         btnPay = (ActionProcessButton) findViewById(R.id.btn_pay);
         btnPay.setMode(ActionProcessButton.Mode.ENDLESS);
+        ifscCode = (FormEditText) findViewById(R.id.id_ifsc);
+        accNum = (FormEditText) findViewById(R.id.id_acc_no);
+        accLayout = (LinearLayout) findViewById(R.id.acc_layout);
 
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnPay.setProgress(1);
-                RestClient.getPayDetailService().settleAmount(transaction.getId(),
-                        amount.getText().toString(), new Callback<JsonElement>() {
-                            @Override
-                            public void success(JsonElement jsonElement, Response response) {
+                if(accLayout.getVisibility() == View.VISIBLE){
+                    btnPay.setProgress(1);
+                    RestClient.getFeedService().postManualTransaction(txn_id, ifscCode.getText().toString(),
+                            accNum.getText().toString(), new Callback<Transaction>() {
+                                @Override
+                                public void success(Transaction tra, Response response) {
+                                    if (tra.getSuccess()) {
+                                        btnPay.setProgress(100);
+                                        RestClient.getFeedService().getTransactionDetail(txn_id, callback);
+
+                                    } else {
+                                        btnPay.setProgress(-1);
+                                        ShowToast.setText("Failed. Please try again later");
+                                    }
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    btnPay.setProgress(-1);
+                                    ShowToast.setText(error.toString());
+                                }
+                            });
+                }else {
+                    btnPay.setProgress(1);
+                    RestClient.getFeedService().settleAmount(transaction.getId(), new Callback<CreatedBill>() {
+                        @Override
+                        public void success(CreatedBill cBill, Response response) {
+                            if (cBill.getSuccess()) {
                                 btnPay.setProgress(100);
                                 Bundle b = new Bundle();
-                                b.putString("billString", jsonElement.toString());
+                                b.putString("billString", cBill.getBill().toString());
                                 b.putString("amount", amount.getText().toString());
                                 Intent in = new Intent(TransactionDetails.this, PaymentActivity.class);
                                 in.putExtras(b);
                                 startActivity(in);
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
+                            } else {
                                 btnPay.setProgress(-1);
+                                ShowToast.setText("Some thing went wrong. please try again later");
                             }
-                        });
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            btnPay.setProgress(-1);
+                            ShowToast.setText("please try again later");
+                        }
+                    });
+                }
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RestClient.getFeedService().cancelTransaction(transaction.getId(), callbackCancleTransaction);
+                RestClient.getFeedService().cancelTransaction(transaction.getId(), callbackCancelTransaction);
             }
         });
     }
@@ -88,46 +127,71 @@ public class TransactionDetails extends Activity {
     private Callback<Transaction> callback = new Callback<Transaction>() {
         @Override
         public void success(Transaction tra, Response response) {
+            btnPay.setProgress(0);
             transaction = tra;
-            custName.setText(transaction.getName());
+            custName.setText((transaction.getName()==null || transaction.getName().isEmpty())?"Customer":transaction.getName());
             aadhaarNum.setText(transaction.getAadhaar());
-            transactionId.setText(transaction.getId());
+            transactionId.setText("txn id : "+transaction.getId());
             status.setText(transaction.getStatus());
-            date.setText(transaction.getId());
+            date.setText(transaction.getDate());
+            amount.setText("Rs "+String.valueOf(transaction.getAmount()));
 
-            if(transaction.getHas_paid())
+            if(transaction.getHas_paid()) {
                 btnPay.setVisibility(View.GONE);
+                accLayout.setVisibility(View.GONE);
+            }
 
-            if(transaction.getStatus().equals("Completed")) {
+            if(!transaction.getHas_account()){
+                accLayout.setVisibility(View.VISIBLE);
+                btnPay.setText("Enter");
+            }else{
+                accLayout.setVisibility(View.GONE);
+                btnPay.setText("Pay Now");
+            }
+
+            if("Completed".equals(transaction.getStatus())) {
                 statusImg.setBackgroundResource(R.drawable.icon_up_green);
-            }else if(Arrays.asList(Config.failed_states).contains(transaction.getStatus()))
+                HideAllView();
+            }else if(Arrays.asList(Config.failed_states).contains(transaction.getStatus())) {
                 statusImg.setBackgroundResource(R.drawable.icon_red_down);
-            else
+                HideAllView();
+            }else
                 statusImg.setBackgroundResource(R.drawable.icon_gray_up);
         }
 
         @Override
         public void failure(RetrofitError error) {
-            Toast.makeText(TransactionDetails.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+            ShowToast.setText(error.toString());
         }
     };
 
+    private void HideAllView(){
+        btnPay.setVisibility(View.GONE);
+        accLayout.setVisibility(View.GONE);
+        btnCancel.setVisibility(View.GONE);
+    }
 
-    private Callback<String> callbackCancleTransaction = new Callback<String>() {
+
+    private Callback<Transaction> callbackCancelTransaction = new Callback<Transaction>() {
         @Override
-        public void success(String str_response, Response response) {
-            Toast.makeText(TransactionDetails.this, str_response, Toast.LENGTH_SHORT).show();
+        public void success(Transaction tra, Response response) {
+            if(tra.getSuccess()) {
+                ShowToast.setText("Cancelled the transaction");
+                RestClient.getFeedService().getTransactionDetail(txn_id, callback);
+            }else
+                ShowToast.setText(tra.getError());
         }
 
         @Override
         public void failure(RetrofitError error) {
-            Toast.makeText(TransactionDetails.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+            ShowToast.setText(error.toString());
         }
     };
 
     @Override
     public void onResume(){
         super.onResume();
+        btnPay.setProgress(0);
         RestClient.getFeedService().getTransactionDetail(txn_id,callback);
     }
 }

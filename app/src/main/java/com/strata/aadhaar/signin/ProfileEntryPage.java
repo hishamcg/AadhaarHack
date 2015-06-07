@@ -52,7 +52,7 @@ public class ProfileEntryPage extends Activity {
                     profile_detail.setName(biz_name.getText().toString());
                     profile_detail.setTan_no(user_tan.getText().toString());
                     update_button.setProgress(1);
-                    RestClient.getProfileService().profileUpdate(profile_detail, new Callback<ProfileDetail>() {
+                    RestClient.getFeedService().profileUpdate(profile_detail, new Callback<ProfileDetail>() {
                         @Override
                         public void success(ProfileDetail detail, Response response) {
                             if(detail.getSuccess()!=null && detail.getSuccess()) {
@@ -67,15 +67,14 @@ public class ProfileEntryPage extends Activity {
                         @Override
                         public void failure(RetrofitError retrofitError) {
                             update_button.setProgress(-1);
-                            ShowToast.setText("Failed to update information\n" +
-                                    "please try again.");
+                            ShowToast.setText(retrofitError.toString());
                         }
                     });
                 }
             }
         });
 
-        RestClient.getProfileService().getInfo(new Callback<ProfileDetail>() {
+        RestClient.getFeedService().getInfo(new Callback<ProfileDetail>() {
             @Override
             public void success(ProfileDetail detail, Response response) {
                 setNBDetails(detail);
@@ -83,6 +82,7 @@ public class ProfileEntryPage extends Activity {
 
             @Override
             public void failure(RetrofitError retrofitError) {
+                ShowToast.setText(retrofitError.toString());
             }
         });
     }

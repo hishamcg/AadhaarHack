@@ -11,7 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.andreabaccega.widget.FormEditText;
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.strata.aadhaar.R;
+import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.signin.ProfileEntryPage;
 import com.strata.aadhaar.signin.SigninActivity;
 import com.strata.aadhaar.utils.SharedPref;
@@ -23,11 +26,28 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String authToken = SharedPref.getStringValue("AUTH_TOKEN");
-        String name = SharedPref.getStringValue("NAME");
-        if (authToken.isEmpty()) {
+        ActionProcessButton btn = (ActionProcessButton)findViewById(R.id.btn);
+        final FormEditText ip = (FormEditText)findViewById(R.id.ip);
+        final FormEditText port = (FormEditText)findViewById(R.id.port);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ip.testValidity() && port.testValidity()){
+                    SharedPref.setStringValue("SERVER_BASE_URL",ip.getText().toString()+":"+port.getText().toString());
+                    RestClient.init(SharedPref.getStringValue("AUTH_TOKEN"));
+                    Validate();
+                }
+            }
+        });
+        if(!SharedPref.getStringValue("SERVER_BASE_URL").isEmpty()) {
+            Validate();
+        }
+    }
+
+    private void Validate(){
+        if (SharedPref.getStringValue("AUTH_TOKEN").isEmpty()) {
             startHome(SigninActivity.class);
-        }else if(name.isEmpty()) {
+        }else if(SharedPref.getStringValue("NAME").isEmpty()) {
             startHome(ProfileEntryPage.class);
         }else{
             startHome(HomeActivity.class);
@@ -40,25 +60,4 @@ public class MainActivity extends Activity {
         finish();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

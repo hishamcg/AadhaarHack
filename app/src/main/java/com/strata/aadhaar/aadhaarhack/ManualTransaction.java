@@ -23,12 +23,13 @@ public class ManualTransaction extends Activity {
     private FormEditText otp,ifscCode,accNum;
     private LinearLayout accLayout;
     private ActionProcessButton button;
+    private String txn_id;
 
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_transaction);
-        final String txn_id = getIntent().getStringExtra("txn_id");
+        txn_id = getIntent().getStringExtra("txn_id");
         otp = (FormEditText) findViewById(R.id.id_otp);
         accLayout = (LinearLayout) findViewById(R.id.acc_layout);
         ifscCode = (FormEditText) findViewById(R.id.id_ifsc);
@@ -50,10 +51,7 @@ public class ManualTransaction extends Activity {
                             if (tra.getSuccess()) {
                                 if(tra.getHas_account()){
                                     button.setProgress(100);
-                                    Intent in = new Intent(ManualTransaction.this,TransactionDetails.class);
-                                    in.putExtra("transaction",txn_id);
-                                    startActivity(in);
-                                    finish();
+                                    ShowActivity();
                                 }else {
                                     button.setProgress(0);
                                     accLayout.setVisibility(View.VISIBLE);
@@ -61,44 +59,52 @@ public class ManualTransaction extends Activity {
                                 }
                             } else {
                                 button.setProgress(-1);
-                                ShowToast.setText("OTP MISMATCH!!!");
+                                ShowToast.setText(tra.getError());
                             }
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
                             button.setProgress(-1);
-                            ShowToast.setText("server error");
+                            ShowToast.setText(error.toString());
                         }
                     });
                 }else if(ifscCode.testValidity() && accNum.testValidity()) {
                     button.setProgress(1);
-                    RestClient.getPayDetailService().postManualTransaction(txn_id,ifscCode.getText().toString(),
-                            accNum.getText().toString(), new Callback<String>() {
+                    RestClient.getFeedService().postManualTransaction(txn_id,ifscCode.getText().toString(),
+                            accNum.getText().toString(), new Callback<Transaction>() {
                         @Override
-                        public void success(String resp_str, Response response) {
-
-                            button.setProgress(100);
-                            Intent in = new Intent(ManualTransaction.this,TransactionDetails.class);
-                            in.putExtra("transaction",txn_id);
-                            startActivity(in);
-                            finish();
-                            ShowToast.setText("Transaction in progress");
-//                            Intent in = new Intent(getBaseContext(), HomeActivity.class);
-//                            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                            startActivity(in);
-//                            finish();
+                        public void success(Transaction tra, Response response) {
+                            if(tra.getSuccess()) {
+                                button.setProgress(100);
+                                ShowActivity();
+                            }else{
+                                button.setProgress(-1);
+                                ShowToast.setText("Failed. Please try again later");
+                            }
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
                             button.setProgress(-1);
-                            ShowToast.setText("server error");
+                            ShowToast.setText(error.toString());
                         }
                     });
                 }
             }
         });
+    }
+
+    private void ShowActivity(){
+        ShowToast.setText("Transaction in progress");
+        Intent in;
+        in = new Intent(ManualTransaction.this,HomeActivity.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(in);
+        in = new Intent(ManualTransaction.this,TransactionDetails.class);
+        in.putExtra("txn_id",txn_id);
+        startActivity(in);
+        finish();
     }
 
 }

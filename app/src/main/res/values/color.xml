@@ -5,6 +5,7 @@
     <color name="white">#fff</color>
     <color name="light_white">#5fff</color>
     <color name="red">#992416</color>
+    <color name="green">#2b9633</color>
     <!-- new ui -->
     <color name="ui_text_gray">#808285</color>
     <color name="ui_medium_gray">#d1d3d4</color>

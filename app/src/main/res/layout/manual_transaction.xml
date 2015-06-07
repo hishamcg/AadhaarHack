@@ -33,7 +33,8 @@
             android:gravity="center"
             android:background="#eee"
             android:inputType="textCapCharacters"
-            android:hint="IFSC CODE"/>
+            android:layout_marginBottom="5dp"
+            android:hint="IFSC Code"/>
         <com.andreabaccega.widget.FormEditText
             custom:emptyErrorString="Account number cannot be blank"
             android:id="@+id/id_acc_no"

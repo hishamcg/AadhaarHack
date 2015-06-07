@@ -60,7 +60,7 @@
                     android:layout_width="45dip"
                     android:layout_height="match_parent"/>
                 <com.andreabaccega.widget.FormEditText
-                    custom:emptyErrorString="Email cannot be blank"
+                    custom:emptyErrorString="Phone cannot be blank"
                     android:id="@+id/user_phone"
                     android:layout_width="match_parent"
                     android:layout_height="45dip"
@@ -88,7 +88,7 @@
                     android:layout_width="45dip"
                     android:layout_height="match_parent"/>
                 <com.andreabaccega.widget.FormEditText
-                    custom:emptyErrorString="Email cannot be blank"
+                    custom:emptyErrorString="Tan number cannot be blank"
                     android:id="@+id/user_tan"
                     android:layout_width="match_parent"
                     android:layout_height="45dip"

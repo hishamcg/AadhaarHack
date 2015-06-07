@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.strata.aadhaar.R;
 import com.strata.aadhaar.aadhaarhack.HomeActivity;
+import com.strata.aadhaar.utils.ShowToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +25,6 @@ import org.json.JSONObject;
 
 public class WebPage extends Activity {
     WebView webView;
-    String feed_id;
     AlertDialog alert;
     @SuppressLint("NewApi")
     @Override
@@ -35,7 +35,6 @@ public class WebPage extends Activity {
         alert.setMessage("Redirecting to Payment Gateway. Please wait ...");
         alert.show();
         String url = getIntent().getStringExtra("url");
-        feed_id = getIntent().getStringExtra("feed_id");
         webView = (WebView) this.findViewById(R.id.webview);
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -72,23 +71,15 @@ public class WebPage extends Activity {
             try {
                 JSONObject response_json = new JSONObject(response);
                 String status = response_json.getString("TxStatus");
-                String feedId = response_json.getString("feedId");
                 if (status.equals("SUCCESS")){
-                    Toast.makeText(activity, "Payment is Successful.",Toast.LENGTH_LONG).show();
+                    ShowToast.setText("Payment is Successful.");
                 }else{
-                    Toast.makeText(activity,response_json.getString("reason"),Toast.LENGTH_LONG).show();
+                    ShowToast.setText(response_json.getString("reason"));
                 }
             }catch (JSONException e) {
-                Toast.makeText(activity.getApplicationContext(),"Payment Failed",Toast.LENGTH_LONG).show();
+                ShowToast.setText("Payment Failed");
                 e.printStackTrace();
             }
-            //finish();  //can be used if ChaMainTabActivity onResume adapter notify is managed
-
-            Bundle b = new Bundle();
-            b.putString("feed_id", feed_id);
-            Intent in = new Intent(getApplicationContext(), HomeActivity.class);
-            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(in);
             finish();
         }
     }

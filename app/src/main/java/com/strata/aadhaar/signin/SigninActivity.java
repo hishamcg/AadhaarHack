@@ -42,7 +42,7 @@ public class SigninActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enter_email.testValidity()){
-                    RestClient.getSigninApiService().resetPassword(enter_email.getText().toString(), new Callback<Boolean>() {
+                    RestClient.getFeedService().resetPassword(enter_email.getText().toString(), new Callback<Boolean>() {
                         @Override
                         public void success(Boolean success, Response response) {
                             if(success){
@@ -66,7 +66,7 @@ public class SigninActivity extends Activity {
 
                     if (enter_email.testValidity() && enter_password.testValidity()) {
                         btnSignIn.setProgress(1);
-                        RestClient.getSigninApiService().userAuthenticate(enter_email.getText().toString()
+                        RestClient.getFeedService().userAuthenticate(enter_email.getText().toString()
                                 ,enter_password.getText().toString(), callback);
                     }else
                         toast("invalid number");
