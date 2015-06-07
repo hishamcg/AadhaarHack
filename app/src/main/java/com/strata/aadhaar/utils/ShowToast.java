@@ -16,7 +16,7 @@ public class ShowToast {
     public static void setText(String txt){
         Toast toast = Toast.makeText(context,
                 txt,
-                Toast.LENGTH_SHORT);
+                Toast.LENGTH_LONG);
         toast.setGravity(Gravity.TOP, 0, 170);
         toast.show();
     }

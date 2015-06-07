@@ -104,9 +104,8 @@ public class ProfileEntryPage extends Activity {
                 .putString("PHONE", detail.getPhone_no());
 
         editor.apply();
-        Toast.makeText(getApplicationContext(), "Information successfully updated", Toast.LENGTH_SHORT).show();
-        Intent in;
-        in = new Intent(getBaseContext(), HomeActivity.class);
+        ShowToast.setText("Information successfully updated");
+        Intent in = new Intent(getBaseContext(), HomeActivity.class);
         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(in);
         finish();

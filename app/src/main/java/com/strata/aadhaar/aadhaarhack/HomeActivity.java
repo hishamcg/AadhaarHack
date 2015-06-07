@@ -39,7 +39,7 @@ public class HomeActivity extends Activity  {
 		setContentView(R.layout.feed_layout);
 
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/style1.ttf");
-        ListView feed_listview = (ListView) findViewById(R.id.feed_list);
+        final ListView feed_listview = (ListView) findViewById(R.id.feed_list);
 		no_feeds = (TextView) findViewById(R.id.no_feeds);
         FloatingActionButton buttonFloat = (FloatingActionButton) findViewById(R.id.create_dine_run);
         buttonFloat.attachToListView(feed_listview);
@@ -48,7 +48,11 @@ public class HomeActivity extends Activity  {
 		feed_listview.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Bundle bund = new Bundle();
+                bund.putSerializable("txn_id", feedList.get(position).getId());
+                Intent in = new Intent(getApplicationContext(), TransactionDetails.class);
+                in.putExtras(bund);
+                startActivity(in);
             }
         });
 
@@ -56,18 +60,13 @@ public class HomeActivity extends Activity  {
             @Override
             public void onClick(View arg0) {
                 if (NetworkStatus.isNetworkAvailable()) {
-                    Bundle bund = new Bundle();
-                    bund.putString("isFromChatPage", "NewDineRun");
                     Intent in = new Intent(getApplicationContext(), CreateNewTransaction.class);
-                    in.putExtras(bund);
                     startActivity(in);
                 }else{
                     Toast.makeText(HomeActivity.this,"Please conenct to internet",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        RestClient.getFeedService().getTransactions(callback);
 	}
 
     private Callback<ArrayList<Transaction>> callback = new Callback<ArrayList<Transaction>>() {
@@ -85,6 +84,8 @@ public class HomeActivity extends Activity  {
 
         @Override
         public void failure(RetrofitError error) {
+            if(feedList.isEmpty())
+                no_feeds.setVisibility(View.VISIBLE);
             Toast.makeText(HomeActivity.this,"Failed to fetch data",Toast.LENGTH_SHORT).show();
         }
     };
@@ -93,22 +94,7 @@ public class HomeActivity extends Activity  {
 	public void onResume() {
         Log.d("OnResume","HomeActiciyty");
 		super.onResume();
-		this.registerReceiver(mMessageReceiver, new IntentFilter("com.strata.team_lunch.chat"));
         RestClient.getFeedService().getTransactions(callback);
-	}
-
-
-	public void onPause() {
-		super.onPause();
-		if(mMessageReceiver != null)
-			this.unregisterReceiver(mMessageReceiver);
-		//close db on destroy.
-		//db.close();
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
 	}
 
 	private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {

@@ -35,17 +35,37 @@
         </activity>
         <activity
             android:name=".aadhaarhack.HomeActivity"
-            android:label="Create"
+            android:label="Home"
             android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name=".signin.ProfileEntryPage"
-            android:label="Create"
+            android:label="Profile"
             android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name=".signin.SigninActivity"
-            android:label="Create"
+            android:label="Register"
+            android:screenOrientation="portrait"  >
+        </activity>
+        <activity
+            android:name=".aadhaarhack.TransactionDetails"
+            android:label="Details"
+            android:screenOrientation="portrait"  >
+        </activity>
+        <activity
+            android:name=".aadhaarhack.ManualTransaction"
+            android:label="Transaction"
+            android:screenOrientation="portrait"  >
+        </activity>
+        <activity
+            android:name=".payment_gateway.PaymentActivity"
+            android:label="Payment"
+            android:screenOrientation="portrait"  >
+        </activity>
+        <activity
+            android:name=".payment_gateway.WebPage"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:screenOrientation="portrait"  >
         </activity>
 

@@ -3,8 +3,49 @@ package com.strata.aadhaar.model;
 import java.io.Serializable;
 
 public class Transaction implements Serializable {
-	private String name,email,phone_no,aadhaar,transanction_no,status,date;
+	private String name,email,phone_no,aadhaar,id,status,date,error;
     private float amount;
+    private Boolean success,isCustomerPresent,has_account,has_paid;
+
+    public Boolean getHas_paid() {
+        return has_paid;
+    }
+
+    public void setHas_paid(Boolean has_paid) {
+        this.has_paid = has_paid;
+    }
+
+    public Boolean getHas_account() {
+        return has_account;
+    }
+
+    public void setHas_account(Boolean has_account) {
+        this.has_account = has_account;
+    }
+
+    public Boolean getIsCustomerPresent() {
+        return isCustomerPresent;
+    }
+
+    public void setIsCustomerPresent(Boolean isCustomerPresent) {
+        this.isCustomerPresent = isCustomerPresent;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
 
     public String getDate() {
         return date;
@@ -46,12 +87,12 @@ public class Transaction implements Serializable {
         this.aadhaar = aadhaar;
     }
 
-    public String getTransanction_no() {
-        return transanction_no;
+    public String getId() {
+        return id;
     }
 
-    public void setTransanction_no(String transanction_no) {
-        this.transanction_no = transanction_no;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getStatus() {

@@ -3,26 +3,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:background="#fff">
+        android:padding="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
+            android:layout_margin="20dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/edittext_top_padding"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
                 android:orientation="horizontal">
                 <IconTextView
                     android:id="@+id/icon_user_aadhaar"
@@ -49,8 +45,56 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/edittext_top_padding"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
+                android:orientation="horizontal">
+                <IconTextView
+                    android:textColor="@color/ui_light_blue"
+                    android:text="{fa-mobile}"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:background="#ccc"
+                    android:layout_width="45dip"
+                    android:layout_height="match_parent"/>
+                <com.andreabaccega.widget.FormEditText
+                    custom:emptyErrorString="Phone cannot be blank"
+                    android:id="@+id/user_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:inputType="phone"
+                    android:paddingLeft="5dip"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dip"
+                    android:background="#eee"
+                    android:hint="Phone *" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_marginTop="@dimen/edittext_top_padding"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <IconTextView
+                    android:textColor="@color/ui_light_blue"
+                    android:text="{fa-rupee}"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:background="#ccc"
+                    android:layout_width="45dip"
+                    android:layout_height="match_parent"/>
+                <com.andreabaccega.widget.FormEditText
+                    custom:emptyErrorString="Email cannot be blank"
+                    android:id="@+id/user_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dip"
+                    android:paddingLeft="5dip"
+                    android:inputType="number"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dip"
+                    android:background="#eee"
+                    android:hint="Amount" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edittext_top_padding"
                 android:orientation="horizontal">
                 <IconTextView
                     android:id="@+id/icon_user_name"
@@ -72,60 +116,6 @@
                     android:layout_marginLeft="5dip"
                     android:background="#eee"
                     android:hint="Name" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edittext_top_padding"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:orientation="horizontal">
-                <IconTextView
-                    android:textColor="@color/ui_light_blue"
-                    android:text="{fa-mobile}"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:background="#ccc"
-                    android:layout_width="45dip"
-                    android:layout_height="match_parent"/>
-                <com.andreabaccega.widget.FormEditText
-                    custom:emptyErrorString="Email cannot be blank"
-                    android:id="@+id/user_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dip"
-                    android:inputType="phone"
-                    android:paddingLeft="5dip"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="5dip"
-                    android:background="#eee"
-                    android:hint="Phone *" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_marginTop="@dimen/edittext_top_padding"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <IconTextView
-                    android:textColor="@color/ui_text_gray"
-                    android:text="{fa-envelope-o}"
-                    android:textSize="25sp"
-                    android:gravity="center"
-                    android:background="#ccc"
-                    android:layout_width="45dip"
-                    android:layout_height="match_parent"/>
-                <com.andreabaccega.widget.FormEditText
-                    custom:emptyErrorString="Email cannot be blank"
-                    android:id="@+id/user_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dip"
-                    android:paddingLeft="5dip"
-                    android:inputType="textEmailAddress"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="5dip"
-                    android:background="#eee"
-                    android:hint="Email" />
             </LinearLayout>
 
             <CheckBox

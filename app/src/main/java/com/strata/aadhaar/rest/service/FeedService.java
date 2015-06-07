@@ -15,10 +15,14 @@ public interface FeedService {
     @GET("/merchants/get_transfers")
     public void getTransactions(Callback<ArrayList<Transaction>> callback);
 
-    @GET("/feed/transaction_detail.json")
-    public void getTransactionDetail(@Query("transaction_id") String merchant_id, Callback<Transaction> callback);
+    @GET("/merchants/get_details.json")
+    public void getTransactionDetail(@Query("id") String id, Callback<Transaction> callback);
 
-    @GET("/feed/transaction_cancel.json")
-    public void cancelTransaction(@Query("transaction_id") String merchant_id, Callback<String> callback);
+    @GET("/transaction/transaction_cancel.json")
+    public void cancelTransaction(@Query("id") String id, Callback<String> callback);
+
+    @GET("/merchants/confirm_otp.json")
+    public void confirmOtp(@Query("otp") String otp,@Query("id") String id, Callback<Transaction> callback);
+
 
 }

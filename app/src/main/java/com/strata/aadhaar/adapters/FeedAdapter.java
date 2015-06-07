@@ -64,7 +64,7 @@ public class FeedAdapter extends ArrayAdapter<Transaction> {
         }
 
         viewHolder.id_aadhaar.setText(feed.getAadhaar());
-        viewHolder.id_txn.setText("Txn : "+feed.getTransanction_no());
+        viewHolder.id_txn.setText("Txn : "+feed.getId());
         viewHolder.id_txn_date.setText(feed.getDate());
         viewHolder.id_amount.setText("Rs "+String.valueOf(feed.getAmount()));
 

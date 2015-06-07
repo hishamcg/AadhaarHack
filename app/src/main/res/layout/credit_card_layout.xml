@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:padding="20dip">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ENTER CREDIT CARD NUMBER"
+        android:gravity="center"
+        android:layout_marginBottom="5dip"
+        android:textColor="#a444"/>
+    <com.citrus.widgets.CardNumberEditText
+        android:id="@+id/card_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:layout_marginBottom="10dip"
+        android:inputType="number"
+        android:background="@drawable/border_black"
+        android:ems="16"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CARD NAME"
+        android:gravity="center"
+        android:layout_marginBottom="5dip"
+        android:textColor="#a444"/>
+    <EditText
+        android:id="@+id/card_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:layout_marginBottom="10dip"
+        android:inputType="textCapCharacters"
+        android:background="@drawable/border_black"
+        android:ems="16"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EXPIRY DATE"
+        android:gravity="center"
+        android:layout_marginBottom="5dip"
+        android:textColor="#a444"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip">
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginEnd="10dip"
+            android:text="MM"
+            android:background="@drawable/border_black"
+            android:drawablePadding="10dip"
+            android:drawableRight="@drawable/arrow_down_small"
+            android:drawableEnd="@drawable/arrow_down_small"/>
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:text="YY"
+            android:background="@drawable/border_black"
+            android:drawablePadding="10dip"
+            android:drawableRight="@drawable/arrow_down_small"
+            android:drawableEnd="@drawable/arrow_down_small"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CVV"
+        android:gravity="center"
+        android:layout_marginBottom="5dip"
+        android:textColor="#a444"/>
+    <EditText
+        android:id="@+id/cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:layout_marginBottom="10dip"
+        android:inputType="number"
+        android:background="@drawable/border_black"
+        android:ems="3"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save the card"
+        android:id="@+id/checkBoxSave"
+        android:layout_gravity="center_horizontal"
+        android:checked="true" />
+
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/pay"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Pay Now"
+        android:textColor="#fff"
+        android:padding="10dip"
+        android:gravity="center"
+        android:background="@drawable/lightblue_container"/>
+
+</LinearLayout>
