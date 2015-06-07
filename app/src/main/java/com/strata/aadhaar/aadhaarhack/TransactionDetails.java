@@ -2,6 +2,7 @@ package com.strata.aadhaar.aadhaarhack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,12 +42,13 @@ public class TransactionDetails extends Activity {
     private TextView custName,aadhaarNum,status,date,transactionId,amount;
     private LinearLayout accLayout;
     private Button btnCancel;
+    ProgressDialog dialog;
 
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_details);
-
+        dialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
         txn_id = getIntent().getStringExtra("txn_id");
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/style1.ttf");
         custName = (TextView) findViewById(R.id.cust_name);
@@ -157,10 +159,12 @@ public class TransactionDetails extends Activity {
                 HideAllView();
             }else
                 statusImg.setBackgroundResource(R.drawable.icon_gray_up);
+            dialog.dismiss();
         }
 
         @Override
         public void failure(RetrofitError error) {
+            dialog.dismiss();
             ShowToast.setText(error.toString());
         }
     };

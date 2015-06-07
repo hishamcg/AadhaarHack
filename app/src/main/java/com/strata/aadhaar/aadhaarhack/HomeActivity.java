@@ -2,6 +2,7 @@ package com.strata.aadhaar.aadhaarhack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class HomeActivity extends Activity  {
     private TextView no_feeds;
 	private ArrayList<Transaction> feedList = new ArrayList<>();
     private FeedAdapter adapter;
+    private ProgressDialog dialog;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,7 +64,7 @@ public class HomeActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.feed_layout);
-
+        dialog = ProgressDialog.show(HomeActivity.this, "", "Loading. Please wait...", true);
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/style1.ttf");
         final ListView feed_listview = (ListView) findViewById(R.id.feed_list);
 		no_feeds = (TextView) findViewById(R.id.no_feeds);
@@ -103,6 +105,7 @@ public class HomeActivity extends Activity  {
                 feedList.addAll(feeds);
                 adapter.notifyDataSetChanged();
             }
+            dialog.dismiss();
         }
 
         @Override
@@ -112,6 +115,7 @@ public class HomeActivity extends Activity  {
             else
                 no_feeds.setVisibility(View.GONE);
             ShowToast.setText(error.toString());
+            dialog.dismiss();
         }
     };
 

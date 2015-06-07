@@ -1,6 +1,7 @@
 package com.strata.aadhaar.aadhaarhack;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -58,7 +59,6 @@ public class CreateNewTransaction extends Activity{
                             newTrac.setAadhaar(user_aadhaar.getText().toString());
                             newTrac.setIsCustomerPresent(checkBox.isChecked());
                             update_button.setProgress(1);
-
                             RestClient.getFeedService().getTransactions(newTrac, new Callback<Transaction>() {
                                 @Override
                                 public void success(Transaction result, Response response) {
