@@ -2,6 +2,7 @@ package com.strata.aadhaar.aadhaarhack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class HomeActivity extends Activity  {
     private TextView no_feeds;
 	private ArrayList<Transaction> feedList = new ArrayList<>();
     private FeedAdapter adapter;
+    private ProgressDialog dialog;
 
 	
 	@SuppressLint("NewApi")
@@ -80,6 +82,7 @@ public class HomeActivity extends Activity  {
                 feedList.addAll(feeds);
                 adapter.notifyDataSetChanged();
             }
+            dialog.dismiss();
         }
 
         @Override
@@ -95,6 +98,7 @@ public class HomeActivity extends Activity  {
         Log.d("OnResume","HomeActiciyty");
 		super.onResume();
         RestClient.getFeedService().getTransactions(callback);
+        dialog = ProgressDialog.show(HomeActivity.this, "", "Loading. Please wait...", true);
 	}
 
 	private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {

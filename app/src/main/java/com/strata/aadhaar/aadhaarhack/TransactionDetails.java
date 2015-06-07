@@ -2,6 +2,7 @@ package com.strata.aadhaar.aadhaarhack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ public class TransactionDetails extends Activity {
     private String txn_id;
     private ActionProcessButton btnPay;
     private  TextView custName,aadhaarNum,status,date,transactionId,amount;
+    ProgressDialog dialog;
 
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +106,13 @@ public class TransactionDetails extends Activity {
                 statusImg.setBackgroundResource(R.drawable.icon_red_down);
             else
                 statusImg.setBackgroundResource(R.drawable.icon_gray_up);
+            dialog.dismiss();
         }
 
         @Override
         public void failure(RetrofitError error) {
             Toast.makeText(TransactionDetails.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
     };
 
@@ -129,5 +133,6 @@ public class TransactionDetails extends Activity {
     public void onResume(){
         super.onResume();
         RestClient.getFeedService().getTransactionDetail(txn_id,callback);
+        ProgressDialog dialog = ProgressDialog.show(TransactionDetails.this, "", "Loading. Please wait...", true);
     }
 }

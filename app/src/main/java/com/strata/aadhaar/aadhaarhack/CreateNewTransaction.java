@@ -1,6 +1,7 @@
 package com.strata.aadhaar.aadhaarhack;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,7 @@ public class CreateNewTransaction extends Activity{
                     update_button.setProgress(1);
 
                     RestClient.getPayDetailService().getTransactions(newTrac, new Callback<Transaction>() {
+                        ProgressDialog dialog = ProgressDialog.show(CreateNewTransaction.this, "", "Loading. Please wait...", true);
                         @Override
                         public void success(Transaction result, Response response) {
                             if (result.getSuccess()) {
@@ -60,12 +62,14 @@ public class CreateNewTransaction extends Activity{
                                 update_button.setProgress(-1);
                                 ShowToast.setText(result.getError());
                             }
+                            dialog.dismiss();
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
                             update_button.setProgress(-1);
                             ShowToast.setText("Failed to update information");
+                            dialog.dismiss();
                         }
                     });
                 }
