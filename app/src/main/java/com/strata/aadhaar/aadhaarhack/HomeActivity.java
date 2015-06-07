@@ -2,13 +2,17 @@ package com.strata.aadhaar.aadhaarhack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.DialogPreference;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +33,7 @@ import com.strata.aadhaar.model.Transaction;
 import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.utils.FontsOverride;
 import com.strata.aadhaar.utils.NetworkStatus;
+import com.strata.aadhaar.utils.SharedPref;
 import com.strata.aadhaar.utils.ShowToast;
 
 import java.util.ArrayList;
@@ -54,8 +59,25 @@ public class HomeActivity extends Activity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this,MainActivity.class));
-            finish();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Reset Ip");
+            alertDialog.setMessage("Are you sure you want to reset IP and port?");
+            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    SharedPref.setStringValue("SERVER_BASE_URL","");
+                    startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                    finish();
+                }
+            });
+            alertDialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            alertDialog.setIcon(R.drawable.ic_launcher);
+            alertDialog.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
