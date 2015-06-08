@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.andreabaccega.widget.FormEditText;
 import com.dd.processbutton.iml.ActionProcessButton;
@@ -36,6 +37,7 @@ public class ManualTransaction extends Activity {
         ifscCode = (FormEditText) findViewById(R.id.id_ifsc);
         accNum = (FormEditText) findViewById(R.id.id_acc_no);
         button = (ActionProcessButton)findViewById(R.id.button);
+        final TextView info = (TextView)findViewById(R.id.info);
         button.setMode(ActionProcessButton.Mode.ENDLESS);
 
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/style1.ttf");
@@ -54,6 +56,7 @@ public class ManualTransaction extends Activity {
                                     button.setProgress(100);
                                     ShowActivity();
                                 }else {
+                                    info.setText("Customers aadhaar not linked to any account. Please enter the details");
                                     button.setProgress(0);
                                     accLayout.setVisibility(View.VISIBLE);
                                     otp.setVisibility(View.GONE);

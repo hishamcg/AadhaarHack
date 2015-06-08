@@ -77,7 +77,7 @@ public class ProfileEntryPage extends Activity {
         RestClient.getFeedService().getInfo(new Callback<ProfileDetail>() {
             @Override
             public void success(ProfileDetail detail, Response response) {
-                setNBDetails(detail);
+                setDetails(detail);
             }
 
             @Override
@@ -87,7 +87,7 @@ public class ProfileEntryPage extends Activity {
         });
     }
 
-    private void setNBDetails(ProfileDetail profile) {
+    private void setDetails(ProfileDetail profile) {
         if(profile.getName()!=null)
             biz_name.setText(profile.getName());
         if(profile.getPhone_no()!=null)

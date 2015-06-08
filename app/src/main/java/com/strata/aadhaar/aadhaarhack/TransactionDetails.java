@@ -39,7 +39,7 @@ public class TransactionDetails extends Activity {
     private String txn_id;
     private ActionProcessButton btnPay;
     private FormEditText ifscCode,accNum;
-    private TextView custName,aadhaarNum,status,date,transactionId,amount;
+    private TextView custName,aadhaarNum,status,date,transactionId,amount,pay_status;
     private LinearLayout accLayout;
     private Button btnCancel;
     ProgressDialog dialog;
@@ -56,6 +56,7 @@ public class TransactionDetails extends Activity {
         status = (TextView) findViewById(R.id.status_txt);
         amount = (TextView) findViewById(R.id.amount);
         date = (TextView) findViewById(R.id.date);
+        pay_status = (TextView) findViewById(R.id.pay_status);
         transactionId = (TextView) findViewById(R.id.transaction_num);
         btnCancel = (Button) findViewById(R.id.btn_trans_cancel);
         statusImg = (ImageView) findViewById(R.id.status_img);
@@ -141,6 +142,7 @@ public class TransactionDetails extends Activity {
             if(transaction.getHas_paid()) {
                 btnPay.setVisibility(View.GONE);
                 accLayout.setVisibility(View.GONE);
+                pay_status.setVisibility(View.VISIBLE);
             }
 
             if(!transaction.getHas_account()){

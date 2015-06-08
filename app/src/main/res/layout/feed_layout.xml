@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:text="No feeds for you"
+        android:text="No Transactions yet. Create new."
         android:visibility="gone" />
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/create_dine_run"

@@ -43,8 +43,8 @@ public interface FeedService {
     @GET("/merchants/get_info.json")
     public void getInfo(Callback<ProfileDetail> callback);
 
-    @GET("/payments/bill_generator.json")
-    public void getBill(@Query("amount") String amount, Callback<JsonElement> callback);
+    @GET("/test.json")
+    public void testIp(Callback<Transaction> callback);
 
     @PUT("/merchants/create_refund.json")
     public void getTransactions(@Body Transaction transaction, Callback<Transaction> callback);

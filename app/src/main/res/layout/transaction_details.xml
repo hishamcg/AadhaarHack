@@ -123,7 +123,15 @@
         custom:pb_textProgress="Loading"
         custom:pb_textError="Retry"
         custom:pb_colorError="@color/red_error" />
-
+    <TextView
+        android:id="@+id/pay_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        android:textSize="22sp"
+        android:text="You have Paid"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 </ScrollView>
 

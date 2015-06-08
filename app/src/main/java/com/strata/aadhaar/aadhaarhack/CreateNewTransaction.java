@@ -69,9 +69,12 @@ public class CreateNewTransaction extends Activity{
                                             Intent in = new Intent(getApplicationContext(), ManualTransaction.class);
                                             in.putExtra("txn_id", result.getId());
                                             startActivity(in);
-                                        } else {
-                                            finish();
+                                        }else{
+                                            Intent in = new Intent(getApplicationContext(), TransactionDetails.class);
+                                            in.putExtra("txn_id",result.getId());
+                                            startActivity(in);
                                         }
+                                        finish();
                                     } else {
                                         update_button.setProgress(-1);
                                         ShowToast.setText(result.getError());

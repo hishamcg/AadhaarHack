@@ -14,10 +14,16 @@ import android.widget.Button;
 import com.andreabaccega.widget.FormEditText;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.strata.aadhaar.R;
+import com.strata.aadhaar.model.Transaction;
 import com.strata.aadhaar.rest.RestClient;
 import com.strata.aadhaar.signin.ProfileEntryPage;
 import com.strata.aadhaar.signin.SigninActivity;
 import com.strata.aadhaar.utils.SharedPref;
+import com.strata.aadhaar.utils.ShowToast;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends Activity {
@@ -35,7 +41,18 @@ public class MainActivity extends Activity {
                 if(ip.testValidity() && port.testValidity()){
                     SharedPref.setStringValue("SERVER_BASE_URL",ip.getText().toString()+":"+port.getText().toString());
                     RestClient.init(SharedPref.getStringValue("AUTH_TOKEN"));
-                    Validate();
+                    RestClient.getFeedService().testIp(new Callback<Transaction>() {
+                        @Override
+                        public void success(Transaction transaction, Response response) {
+                            Validate();
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            SharedPref.setStringValue("SERVER_BASE_URL","");
+                            ShowToast.setText(error.toString());
+                        }
+                    });
                 }
             }
         });

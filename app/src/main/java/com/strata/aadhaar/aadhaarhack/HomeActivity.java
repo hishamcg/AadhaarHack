@@ -60,13 +60,24 @@ public class HomeActivity extends Activity  {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle("Reset Ip");
-            alertDialog.setMessage("Are you sure you want to reset IP and port?");
+            alertDialog.setTitle("Logout");
+            alertDialog.setMessage("Are you sure you want to logout.?\n this will clear all your data");
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                     SharedPref.setStringValue("SERVER_BASE_URL","");
-                    startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                    SharedPreferences preferences = getSharedPreferences("PREF", Context.MODE_PRIVATE);
+                    preferences.edit().putString("NAME", "")
+                            .putString("TAN", "")
+                            .putString("PHONE", "")
+                            .putString("SERVER_BASE_URL","")
+                            .putString("EMAIL","")
+                            .putString("AUTH_TOKEN2","")
+                            .apply();
+                    ShowToast.setText("Data successfully cleared");
+                    Intent in = new Intent(HomeActivity.this, MainActivity.class);
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(in);
                     finish();
                 }
             });

@@ -7,6 +7,15 @@
     android:background="#ccc"
     android:padding="40dp"
     android:gravity="center">
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:text="Enter OTP code as sent to the customer"
+        android:textColor="@color/ui_text_gray"/>
     <com.andreabaccega.widget.FormEditText
         custom:emptyErrorString="OTP cannot be blank"
         android:id="@+id/id_otp"

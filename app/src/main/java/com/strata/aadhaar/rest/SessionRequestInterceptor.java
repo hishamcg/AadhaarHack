@@ -2,8 +2,7 @@ package com.strata.aadhaar.rest;
 
 import retrofit.RequestInterceptor;
 
-class SessionRequestInterceptor implements RequestInterceptor
-{
+class SessionRequestInterceptor implements RequestInterceptor{
     private String authToken = "";
     public void setAuthToken(String auth){
         this.authToken = auth;
