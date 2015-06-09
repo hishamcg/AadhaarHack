@@ -67,12 +67,13 @@ public class HomeActivity extends Activity  {
                     dialog.cancel();
                     SharedPref.setStringValue("SERVER_BASE_URL","");
                     SharedPreferences preferences = getSharedPreferences("PREF", Context.MODE_PRIVATE);
-                    preferences.edit().putString("NAME", "")
+                    preferences.edit()
+                            .putString("NAME", "")
                             .putString("TAN", "")
                             .putString("PHONE", "")
                             .putString("SERVER_BASE_URL","")
                             .putString("EMAIL","")
-                            .putString("AUTH_TOKEN2","")
+                            .putString("AUTH_TOKEN","")
                             .apply();
                     ShowToast.setText("Data successfully cleared");
                     Intent in = new Intent(HomeActivity.this, MainActivity.class);
